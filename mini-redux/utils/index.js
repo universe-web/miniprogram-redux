@@ -7,9 +7,8 @@ exports.getState = getState;
 exports.redux = Behavior({
   lifetimes: {
     attached() {
-      const { __wxExparserNodeId__, handleSetData } = this;
-      subscribe(__wxExparserNodeId__, handleSetData, this);
-      handleSetData.call(this, true);
+      subscribe(this.__wxExparserNodeId__, this.handleSetData, this);
+      this.handleSetData.call(this, true);
     },
     detached() {
       unsubscribe(this.__wxExparserNodeId__);
