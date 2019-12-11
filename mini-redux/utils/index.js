@@ -7,19 +7,41 @@ exports.getState = getState;
 exports.redux = Behavior({
   lifetimes: {
     attached() {
-      const { __wxExparserNodeId__, handleSetData, data } = this;
-      subscribe(__wxExparserNodeId__, handleSetData, data.selector, this);
-      handleSetData.call(this, data.selector);
+      const { __wxExparserNodeId__, handleSetData } = this;
+      subscribe(__wxExparserNodeId__, handleSetData, this);
+      handleSetData.call(this, true);
     },
     detached() {
       unsubscribe(this.__wxExparserNodeId__);
     }
   },
 
+  definitionFilter(defFields) {
+    var selector = defFields.selector;
+    if (!selector) {
+      throw new Error("no selector function");
+    }
+    defFields.methods._selector = selector;
+
+    if (defFields.componentDidUpdate) {
+      defFields.methods._componentDidUpdate = defFields.componentDidUpdate;
+    }
+  },
+
   methods: {
-    handleSetData(selector) {
-      const pageData = selector(state);
+    handleSetData(isPageCome) {
+      const pageData = this._selector(state);
       this.setData(pageData);
+
+      if (!isPageCome) {
+        if (this._componentDidUpdate) {
+          if (preState) {
+            this._componentDidUpdate(this._selector(preState));
+          } else {
+            this._componentDidUpdate({});
+          }
+        }
+      }
     }
   }
 });
@@ -39,7 +61,7 @@ function getState() {
   return JSON.parse(JSON.stringify(state));
 }
 
-function subscribe(id, listener, selector, that) {
+function subscribe(id, listener, that) {
   let bol = true;
   for (let i in listeners) {
     if (listeners[i].id === id) {
@@ -47,7 +69,7 @@ function subscribe(id, listener, selector, that) {
       break;
     }
   }
-  bol && listeners.push({ id, listener, selector, that });
+  bol && listeners.push({ id, listener, that });
 }
 
 function unsubscribe(id) {
@@ -70,7 +92,7 @@ function dispath(action) {
 }
 
 function notify() {
-  listeners.forEach(child => child.listener.call(child.that, child.selector));
+  listeners.forEach(child => child.listener.call(child.that));
 }
 
 function updateStore(action, reducer, state) {

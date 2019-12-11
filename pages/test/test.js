@@ -14,9 +14,24 @@ const selector = function(state) {
 
 Component({
   behaviors: [redux],
-  data: {
-    selector: selector
+  selector: selector,
+
+  observers: {
+    acc: function(acc) {
+      if (acc === 4) {
+        console.log(acc);
+      }
+    }
   },
+
+  componentDidUpdate: function(prestate) {
+    const { acc } = this.data;
+
+    if (prestate.acc !== acc) {
+      console.log(`acc：${prestate.acc} -> ${acc}`);
+    }
+  },
+
   lifetimes: {
     attached() {
       dispath(aysncTest({ acc: 2 }));

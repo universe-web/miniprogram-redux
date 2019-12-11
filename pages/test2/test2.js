@@ -11,17 +11,7 @@ const selector = function(state) {
 
 Component({
   behaviors: [redux],
-  data: {
-    selector: selector
-  },
-  lifetimes: {
-    created() {},
-    attached() {
-      /* alterA(3);
-      showT(); */
-    },
-    detached() {}
-  },
+  selector: selector,
 
   methods: {
     handleChange() {
