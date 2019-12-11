@@ -3,7 +3,6 @@
   <view>acc: {{ acc }}</view>
   <button bindtap="handlePrint">打印页面数据</button>
   <button bindtap="handleChange">改变store数据：acc + 1</button>
-  <button bindtap="handlePrintStore">打印store数据</button>
   <navigator url="/pages/test2/test2">click to test2</navigator>
   <test />
 

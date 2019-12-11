@@ -1,4 +1,3 @@
 <view>title: {{ name }}</view>
 <view>acc: {{ acc }}</view>
 <button bindtap="handleChange">改变store数据：acc + 2</button>
-<button bindtap="handlePrintStore">打印store数据</button>

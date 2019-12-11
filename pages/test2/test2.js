@@ -1,8 +1,7 @@
-const selector = require("./../../utils/selector");
-const { dispath, getState } = getApp().state;
-import { aysncTest2 } from "./../../utils/actions/index";
+const { redux, dispath } = getApp().redux;
+import { aysncTest2 } from "./../../mini-redux-js/actions/index";
 
-const select = function(state) {
+const selector = function(state) {
   const { name, acc } = state.test2;
   return {
     name,
@@ -11,13 +10,16 @@ const select = function(state) {
 };
 
 Component({
-  behaviors: [selector],
+  behaviors: [redux],
   data: {
-    select: select
+    selector: selector
   },
   lifetimes: {
     created() {},
-    attached() {},
+    attached() {
+      /* alterA(3);
+      showT(); */
+    },
     detached() {}
   },
 
@@ -26,10 +28,6 @@ Component({
       let { acc } = this.data;
       acc += 2;
       dispath(aysncTest2({ acc }));
-    },
-
-    handlePrintStore() {
-      console.log(getState());
     }
   }
 });

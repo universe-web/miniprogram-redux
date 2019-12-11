@@ -1,8 +1,7 @@
-const selector = require("./../../utils/selector");
-const { dispath, getState } = getApp().state;
-import { aysncTest, getTestListSum } from "./../../utils/actions/index";
+const { redux, dispath } = getApp().redux;
+import { aysncTest, getTestListSum } from "./../../mini-redux-js/actions/index";
 
-const select = function(state) {
+const selector = function(state) {
   const { name, acc } = state.test.test;
   const { list, sum } = state.test.list;
   return {
@@ -14,10 +13,9 @@ const select = function(state) {
 };
 
 Component({
-  behaviors: [selector],
-  // select: selection,
+  behaviors: [redux],
   data: {
-    select: select
+    selector: selector
   },
   lifetimes: {
     attached() {
@@ -34,10 +32,6 @@ Component({
 
     handlePrint() {
       console.log(this.data);
-    },
-
-    handlePrintStore() {
-      console.log(getState());
     },
 
     onPullDownRefresh() {
