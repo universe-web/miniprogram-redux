@@ -9,7 +9,7 @@ exports.redux = Behavior({
     attached() {
       const { __wxExparserNodeId__, handleSetData, data } = this;
       subscribe(__wxExparserNodeId__, handleSetData, data.selector, this);
-      handleSetData.call(this, this.data.selector);
+      handleSetData.call(this, data.selector);
     },
     detached() {
       unsubscribe(this.__wxExparserNodeId__);
@@ -26,7 +26,8 @@ exports.redux = Behavior({
 
 let preState, state;
 let listeners = [];
-let middlewares, reducers;
+let middlewares;
+let reducers;
 
 function createStore(reducer, middlewarelists) {
   reducers = reducer;
