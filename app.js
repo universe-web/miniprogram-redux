@@ -6,8 +6,5 @@ createStore(reducers);
 
 App({
   onLaunch: function() {},
-  globalData: {
-    userInfo: null
-  },
   redux
 });
