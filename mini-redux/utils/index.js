@@ -47,12 +47,14 @@ exports.redux = Behavior({
 
 let preState, state;
 let listeners = [];
-let middlewares;
+// let middlewares;
 let reducers;
+let action;
+let sagas;
 
-function createStore(reducer, middlewarelists) {
+function createStore(reducer, saga) {
   reducers = reducer;
-  middlewares = middlewarelists;
+  sagas = saga;
   state = updateStore({}, reducers, preState);
 }
 
@@ -83,15 +85,25 @@ function unsubscribe(id) {
   idx !== -1 && listeners.splice(idx, 1);
 }
 
-function dispath(action) {
+function dispath(_action) {
+  action = _action;
   preState = state;
-  state = updateStore(action, reducers, preState);
-  console.log(preState, action, state);
+  state = updateStore(_action, reducers, preState);
+  console.log(preState, _action, state);
   notify();
+  handleSagas();
 }
 
 function notify() {
   listeners.forEach(child => child.listener.call(child.that));
+}
+
+function handleSagas() {
+  if (sagas) {
+    if (sagas[action.type]) {
+      sagas[action.type].forEach(cb => cb(state));
+    }
+  }
 }
 
 function updateStore(action, reducer, state) {
