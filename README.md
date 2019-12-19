@@ -1,7 +1,7 @@
 # miniprogram-redux
 适用于小程序的模拟redux工具，实现了dispath action后自动更新页面；
 
-实现异形saga、logger，功能类似；
+实现异形saga、logger（待优化），功能类似；
 
 实现componentDidUpdate，在state改变后由此方法可以监控数据变化；
 
