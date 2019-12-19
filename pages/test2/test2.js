@@ -1,4 +1,4 @@
-const { redux, dispath } = getApp().redux;
+import { redux, dispath } from "./../../mini-redux/index";
 import { aysncTest2 } from "./../../mini-redux-js/actions/index";
 
 const selector = function(state) {

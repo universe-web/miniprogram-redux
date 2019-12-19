@@ -7,8 +7,8 @@ exports.getState = getState;
 exports.redux = Behavior({
   lifetimes: {
     attached() {
-      subscribe(this.__wxExparserNodeId__, this.handleSetData, this);
-      this.handleSetData.call(this, true);
+      subscribe(this.__wxExparserNodeId__, this.updateData, this);
+      this.updateData.call(this, true);
     },
     detached() {
       unsubscribe(this.__wxExparserNodeId__);
@@ -28,7 +28,7 @@ exports.redux = Behavior({
   },
 
   methods: {
-    handleSetData(isPageCome) {
+    updateData(isPageCome) {
       const pageData = this._selector(state);
       this.setData(pageData);
 
@@ -47,15 +47,14 @@ exports.redux = Behavior({
 
 let preState, state;
 let listeners = [];
-// let middlewares;
 let reducers;
-let action;
+let action = {};
 let sagas;
 
 function createStore(reducer, saga) {
   reducers = reducer;
   sagas = saga;
-  state = updateStore({}, reducers, preState);
+  state = updateStore(reducers, preState);
 }
 
 function getState() {
@@ -88,7 +87,7 @@ function unsubscribe(id) {
 function dispath(_action) {
   action = _action;
   preState = state;
-  state = updateStore(_action, reducers, preState);
+  state = updateStore(reducers, preState);
   console.log(preState, _action, state);
   notify();
   handleSagas();
@@ -101,12 +100,12 @@ function notify() {
 function handleSagas() {
   if (sagas) {
     if (sagas[action.type]) {
-      sagas[action.type].forEach(cb => cb(state));
+      sagas[action.type].forEach(cb => cb(state, action));
     }
   }
 }
 
-function updateStore(action, reducer, state) {
+function updateStore(reducer, state) {
   const res = {};
   for (let i in reducer) {
     if (typeof reducer[i] === "function") {
@@ -117,9 +116,9 @@ function updateStore(action, reducer, state) {
       }
     } else {
       if (state && state[i]) {
-        res[i] = updateStore(action, reducer[i], state[i]);
+        res[i] = updateStore(reducer[i], state[i]);
       } else {
-        res[i] = updateStore(action, reducer[i]);
+        res[i] = updateStore(reducer[i]);
       }
     }
   }

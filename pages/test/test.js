@@ -1,5 +1,6 @@
-const { redux, dispath } = getApp().redux;
+import { redux, dispath } from "./../../mini-redux/index";
 import { aysncTest, getTestListSum } from "./../../mini-redux-js/actions/index";
+import { binarySearch } from "./../../utils/util";
 
 const selector = function(state) {
   const { name, acc } = state.test.test;
@@ -35,6 +36,7 @@ Component({
   lifetimes: {
     attached() {
       dispath(aysncTest({ acc: 2 }));
+      console.log(binarySearch([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 11));
     }
   },
 
