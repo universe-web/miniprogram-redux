@@ -54,7 +54,14 @@
 		},
 		"miniprogram": {
 			"current": -1,
-			"list": []
+			"list": [
+				{
+					"id": -1,
+					"name": "pages/test2/test2",
+					"pathName": "pages/test2/test2",
+					"scene": null
+				}
+			]
 		}
 	}
 }

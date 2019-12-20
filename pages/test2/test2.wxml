@@ -1,3 +1,5 @@
-<view>title: {{ name }}</view>
-<view>acc: {{ acc }}</view>
-<button bindtap="handleChange">改变store数据：acc + 2</button>
+<pageoption needLogin="{{true}}">
+  <view>title: {{ name }}</view>
+  <view>acc: {{ acc }}</view>
+  <button bindtap="handleChange">改变store数据：acc + 2</button>
+</pageoption>

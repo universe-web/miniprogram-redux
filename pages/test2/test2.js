@@ -13,6 +13,8 @@ Component({
   behaviors: [redux],
   selector: selector,
 
+  lifetimes: {},
+
   methods: {
     handleChange() {
       let { acc } = this.data;

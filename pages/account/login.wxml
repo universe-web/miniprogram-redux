@@ -1,0 +1,3 @@
+<view class="wrapper">
+  <view class="login" bindtap="handleLogin">Login</view>
+</view>

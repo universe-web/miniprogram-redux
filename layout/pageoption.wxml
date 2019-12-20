@@ -1,0 +1,2 @@
+<login wx:if="{{needLogin && !isLogin}}" />
+<slot wx:else />

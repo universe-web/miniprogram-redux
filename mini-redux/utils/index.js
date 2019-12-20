@@ -20,6 +20,9 @@ exports.redux = Behavior({
     if (!selector) {
       throw new Error("no selector function");
     }
+    if (!defFields.methods) {
+      defFields.methods = {};
+    }
     defFields.methods._selector = selector;
 
     if (defFields.componentDidUpdate) {

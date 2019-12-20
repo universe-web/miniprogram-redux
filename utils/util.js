@@ -26,6 +26,14 @@ function request() {
   });
 }
 
+function requestLogin() {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve({ code: 0 });
+    }, 0);
+  });
+}
+
 // 二分查找法
 function binarySearch(arr, target) {
   if (arr.length === 0) {
@@ -58,5 +66,6 @@ function binarySearch(arr, target) {
 module.exports = {
   formatTime,
   request,
+  requestLogin,
   binarySearch
 };

@@ -1,5 +1,6 @@
 import testSaga from "./test";
 import test2Saga from "./test2";
+import accountSaga from "./account";
 
 function initSaga(...sagaList) {
   return sagaList.flat(2).reduce((acc, cur) => {
@@ -12,4 +13,4 @@ function initSaga(...sagaList) {
   }, {});
 }
 
-export default initSaga(testSaga, test2Saga);
+export default initSaga(testSaga, test2Saga, accountSaga);
