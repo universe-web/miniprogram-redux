@@ -91,7 +91,15 @@ function dispath(_action) {
   action = _action;
   preState = state;
   state = updateStore(reducers, preState);
-  console.log(preState, _action, state);
+  console.log(
+    "prev state:",
+    preState,
+    "" + "\n",
+    _action,
+    "" + "\n",
+    "next state:",
+    state
+  );
   notify();
   handleSagas();
 }
