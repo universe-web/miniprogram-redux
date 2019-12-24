@@ -6,3 +6,4 @@ exports.unsubscribe = reduxContext.unsubscribe;
 exports.dispath = reduxContext.dispath;
 exports.getState = reduxContext.getState;
 exports.redux = reduxContext.redux;
+exports.clearState = reduxContext.clearState;

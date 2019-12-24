@@ -9,4 +9,6 @@
   <view>arr：{{ list }}</view>
   <view>sum of arr：{{ sum }}</view>
   <button bindtap="handleGetSum">get sum of arr</button>
+
+  <button bindtap="handleClearState">clear state</button>
 </view>

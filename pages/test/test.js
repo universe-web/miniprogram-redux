@@ -1,4 +1,4 @@
-import { redux, dispath } from "./../../mini-redux/index";
+import { redux, dispath, clearState } from "./../../mini-redux/index";
 import { aysncTest, getTestListSum } from "./../../mini-redux-js/actions/index";
 import { binarySearch } from "./../../utils/util";
 
@@ -61,6 +61,10 @@ Component({
 
     handleGetSum() {
       dispath(getTestListSum());
+    },
+
+    handleClearState() {
+      clearState();
     }
   }
 });

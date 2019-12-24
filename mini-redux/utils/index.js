@@ -3,6 +3,7 @@ exports.subscribe = subscribe;
 exports.unsubscribe = unsubscribe;
 exports.dispath = dispath;
 exports.getState = getState;
+exports.clearState = clearState;
 
 exports.redux = Behavior({
   lifetimes: {
@@ -20,6 +21,7 @@ exports.redux = Behavior({
     if (!selector) {
       throw new Error("no selector function");
     }
+
     if (!defFields.methods) {
       defFields.methods = {};
     }
@@ -50,13 +52,12 @@ exports.redux = Behavior({
 
 let preState, state;
 let listeners = [];
-let reducers;
+let reducers, sagas;
 let action = {};
-let sagas;
 
 function createStore(reducer, saga) {
   reducers = reducer;
-  sagas = saga;
+  sagas = saga || undefined;
   state = updateStore(reducers, preState);
 }
 
@@ -134,4 +135,11 @@ function updateStore(reducer, state) {
     }
   }
   return res;
+}
+
+function clearState() {
+  preState = state;
+  action = {};
+  state = updateStore(reducers);
+  notify();
 }
