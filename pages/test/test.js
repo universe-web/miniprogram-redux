@@ -1,5 +1,5 @@
 import { redux, dispath, clearState } from "./../../mini-redux/index";
-import { aysncTest, getTestListSum } from "./../../mini-redux-js/actions/index";
+import { aysncTest, getTestListSum } from "./../../redux-actions/index";
 import { binarySearch } from "./../../utils/util";
 
 const selector = function(state) {

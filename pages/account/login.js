@@ -1,5 +1,5 @@
-import { login } from "./../../mini-redux-js/actions/index";
-import { dispath } from "./../../mini-redux/index";
+import { login } from "../../redux-actions/index";
+import { dispath } from "../../mini-redux/index";
 
 Component({
   methods: {

@@ -1,5 +1,5 @@
 import { redux, dispath } from "./../../mini-redux/index";
-import { aysncTest2 } from "./../../mini-redux-js/actions/index";
+import { aysncTest2 } from "./../../redux-actions/index";
 
 const selector = function(state) {
   const { name, acc } = state.test2;
@@ -13,7 +13,11 @@ Component({
   behaviors: [redux],
   selector: selector,
 
-  lifetimes: {},
+  lifetimes: {
+    attached() {
+      console.log("Page test2");
+    }
+  },
 
   methods: {
     handleChange() {

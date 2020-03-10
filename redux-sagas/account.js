@@ -1,6 +1,6 @@
-import { dispath } from "./../../mini-redux/index";
-import { loginCompletion } from "./../../mini-redux-js/actions/index";
-import { requestLogin } from "./../../utils/util";
+import { dispath } from "../mini-redux/index";
+import { loginCompletion } from "../redux-actions/index";
+import { requestLogin } from "../utils/util";
 
 const watchLogin = {
   type: "LOGIN",
